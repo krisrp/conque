@@ -53,6 +53,7 @@ import termios
 import struct
 import shlex
 
+
 class ConqueSubprocess:
 
     # process id
@@ -153,6 +154,12 @@ class ConqueSubprocess:
             os.kill(self.pid, signum)
         except:
             pass
+
+    def abort(self):
+        """ Abort signal"""
+
+        self.signal(6)
+        os.waitpid(self.pid, 0)
 
     def close(self):
         """ Close process with sigterm signal """
